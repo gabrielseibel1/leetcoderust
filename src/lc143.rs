@@ -1,8 +1,3 @@
-use std::mem;
-use std::mem::take;
-use std::ops::{Deref, DerefMut};
-use log::error;
-
 type List = Option<Box<ListNode>>;
 
 #[derive(PartialEq, Eq, Clone, Debug)]
@@ -32,7 +27,7 @@ pub fn reorder_list(head: &mut List) {
     reverse(&mut clo);
     let mut rev = clo;
 
-    zip(head, &mut rev, length/2);
+    zip(head, &mut rev, length / 2);
 }
 
 fn zip(ord: &mut List, rev: &mut List, length: i32) {
@@ -54,7 +49,7 @@ fn zip(ord: &mut List, rev: &mut List, length: i32) {
     let mut n8 = n9.as_mut().unwrap().next.take();
     n1.next = n9.take();
     n1.next.as_mut().unwrap().next = n2;
-    zip(&mut n1.next.as_mut().unwrap().next, &mut n8, length -1)
+    zip(&mut n1.next.as_mut().unwrap().next, &mut n8, length - 1)
 }
 
 fn walk(list: &mut List, n: i32) {
