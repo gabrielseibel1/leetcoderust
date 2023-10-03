@@ -8,6 +8,7 @@ pub struct ListNode {
 
 impl ListNode {
     #[inline]
+    #[allow(dead_code)]
     fn new(val: i32) -> Self {
         ListNode {
             next: None,
@@ -71,17 +72,6 @@ fn reverse(list: &mut List) {
     }
 }
 
-fn print(list: &List) {
-    match list {
-        None => println!("->🏁"),
-        Some(node) => {
-            print!("->{}", node.val);
-            print(&node.next);
-        }
-    }
-}
-
-
 fn len(list: &List) -> i32 {
     match list {
         None => 0,
@@ -89,21 +79,32 @@ fn len(list: &List) -> i32 {
     }
 }
 
-fn eq(l: &List, s: &[i32]) -> bool {
-    if s.is_empty() {
-        return l.is_none();
-    }
-    match l {
-        None => s.len() == 0,
-        Some(ln) => {
-            ln.val.eq(&s[0]) && eq(&ln.next, &s[1..s.len()])
-        }
-    }
-}
-
+#[allow(dead_code)]
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn eq(l: &List, s: &[i32]) -> bool {
+        if s.is_empty() {
+            return l.is_none();
+        }
+        match l {
+            None => s.is_empty(),
+            Some(ln) => {
+                ln.val.eq(&s[0]) && eq(&ln.next, &s[1..s.len()])
+            }
+        }
+    }
+
+    fn print(list: &List) {
+        match list {
+            None => println!("->🏁"),
+            Some(node) => {
+                print!("->{}", node.val);
+                print(&node.next);
+            }
+        }
+    }
 
     #[test]
     fn test_reorder_list() {

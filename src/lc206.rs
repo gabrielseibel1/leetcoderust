@@ -1,5 +1,3 @@
-use log::warn;
-
 // Definition for singly-linked list.
 // #[derive(PartialEq, Eq, Clone, Debug)]
 pub struct ListNode {
@@ -9,6 +7,7 @@ pub struct ListNode {
 
 impl ListNode {
     #[inline]
+    #[allow(dead_code)]
     fn new(val: i32) -> Self {
         ListNode {
             next: None,
@@ -22,7 +21,7 @@ pub fn reverse_list(head: Option<Box<ListNode>>) -> Option<Box<ListNode>> {
     let mut next: Option<Box<ListNode>> = head;
     loop {
         if next.is_none() {
-            break
+            break;
         }
         let mut next_node: Box<ListNode> = next.take().unwrap();
         let fwd = next_node.next.take();

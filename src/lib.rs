@@ -4,3 +4,4 @@ pub mod lc242;
 pub mod lc74;
 pub mod lc143;
 pub mod lc206;
+pub mod lc22;
