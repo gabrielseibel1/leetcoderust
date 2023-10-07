@@ -6,3 +6,5 @@ pub mod lc143;
 pub mod lc206;
 pub mod lc22;
 pub mod lc739;
+
+pub mod lc572;
