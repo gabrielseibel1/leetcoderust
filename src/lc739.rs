@@ -3,7 +3,7 @@ pub fn daily_temperatures(temperatures: Vec<i32>) -> Vec<i32> {
     let mut stk = Vec::<usize>::with_capacity(temperatures.len());
     for i in 0..temperatures.len() {
         while let Some(pos) = stk.last() {
-            if temperatures[*pos as usize] < temperatures[i] {
+            if temperatures[*pos] < temperatures[i] {
                 let p = stk.pop().unwrap();
                 ans[p] = (i - p) as i32;
             } else {
