@@ -10,38 +10,18 @@ impl Solution {
         if piles.len() == 1 {
             return (piles[0] as f64 / h as f64).ceil() as i32;
         }
-        match piles.len().cmp(&(h as usize)) {
-            Ordering::Less => binary_search(h, *piles.iter().max().unwrap(), &piles),
-            Ordering::Equal => *piles.iter().max().unwrap(),
-            Ordering::Greater => panic!("can't eat that many bananas in such short amount of time")
-        }
-    }
-}
-
-#[cfg(test)]
-fn binary_search(h: i32, max: i32, piles: &[i32]) -> i32 {
-    let (mut i, mut j) = (1, max);
-    loop {
-        let x = (i + j) as f64 / 2f64;
-        let d = x.floor();
-        match piles.iter().fold(0i64, |a, b| { a + (*b as f64 / d).ceil() as i64 }).cmp(&(h as i64)) {
-            Ordering::Equal | Ordering::Less => {
-                // try to find a lower m, or break if its impossible
-                if i == j {
-                    break;
-                }
-                j = x.floor() as i32;
-            }
-            Ordering::Greater => {
-                // try to find a greater m
-                if i == j {
-                    break;
-                }
-                i = x.ceil() as i32;
+        let (mut i, mut j) = (1, *piles.iter().max().unwrap());
+        while i != j {
+            let x = (i + j) as f64 / 2f64;
+            match piles.iter()
+                .fold(0i64, |a, b| { a + (*b as f64 / x.floor()).ceil() as i64 })
+                .cmp(&(h as i64)) {
+                Ordering::Equal | Ordering::Less => { j = x.floor() as i32 }
+                Ordering::Greater => { i = x.ceil() as i32 }
             }
         }
+        i
     }
-    i
 }
 
 #[cfg(test)]
