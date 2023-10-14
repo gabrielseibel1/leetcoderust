@@ -9,3 +9,4 @@ pub mod lc739;
 pub mod lc572;
 pub mod lc853;
 pub mod lc875;
+pub mod lc33;
